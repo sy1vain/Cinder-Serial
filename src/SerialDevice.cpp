@@ -71,7 +71,11 @@ SerialDevice::SerialDevice(const std::string& portName, uint32_t baudRate, const
 }
 
 SerialDevice::~SerialDevice() {
+#if defined(CINDER_MSW)
+    flush();
+ #else
     flushOutput();
+ #endif
     close();
 }
 
